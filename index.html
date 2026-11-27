@@ -4,327 +4,175 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#080d1c">
+    <meta name="theme-color" content="#080d20">
+    <meta name="description" content="A little universe made with love, just for Rain.">
 
     <title>The Little World Waiting for Rain</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@300;400;500&family=Great+Vibes&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=DM+Sans:wght@300;400;500&family=Great+Vibes&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="style.css">
+
+    <script src="script.js" defer></script>
 </head>
 
 <body>
 
-    <!-- AMBIENT AUDIO -->
-
-    <audio id="music" loop preload="auto">
-        <source src="background-music.mp3" type="audio/mpeg">
-    </audio>
-
-    <!-- CANVAS LAYERS -->
-
-    <canvas id="starCanvas"></canvas>
-    <canvas id="heartCanvas"></canvas>
-
-    <!-- ATMOSPHERE -->
-
-    <div class="grain"></div>
-    <div class="vignette"></div>
-
-    <div class="ambient-glow"></div>
-
-    <!-- MUSIC CONTROL -->
-
-    <button id="musicControl" class="music-control">
-        <span id="musicIcon">♪</span>
-        <span id="musicText">MUSIC ON</span>
-    </button>
-
-    <!-- TIMELINE -->
-
-    <div id="timeline" class="timeline">
-        <div class="timeline-track">
-            <div id="timelineProgress"></div>
-        </div>
-
-        <span id="timelineLabel">A LITTLE WORLD FOR RAIN</span>
-    </div>
-
-    <!-- =====================================
-         INTRODUCTION
-    ====================================== -->
-
     <main id="experience">
 
-        <section id="intro" class="scene intro active">
+        <!-- Animated universe -->
+        <canvas id="world" aria-hidden="true"></canvas>
 
-            <div class="intro-moon"></div>
+        <!-- Atmospheric layers -->
+        <div class="vignette"></div>
+        <div class="grain"></div>
+        <div class="soft-glow"></div>
+
+        <!-- Top interface -->
+        <header class="top-ui" id="topUI">
+
+            <div class="brand">
+                <span class="brand-star">✦</span>
+                <span>A LITTLE UNIVERSE</span>
+            </div>
+
+            <button
+                class="music-button"
+                id="musicButton"
+                type="button"
+                aria-label="Toggle background music"
+            >
+                <span class="music-icon" id="musicIcon">♫</span>
+                <span class="music-label" id="musicLabel">SOUND OFF</span>
+            </button>
+
+        </header>
+
+        <!-- Timeline -->
+        <div class="progress-container" id="progressContainer">
+
+            <div class="progress-info">
+                <span id="sceneLabel">A QUIET LITTLE BEGINNING</span>
+                <span id="timeLabel">00:00</span>
+            </div>
+
+            <div class="progress-track">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+
+        </div>
+
+        <!-- Opening screen -->
+        <section class="intro-screen" id="introScreen">
 
             <div class="intro-content">
 
-                <div class="intro-overline">
-                    A LITTLE SOMETHING MADE WITH LOVE
+                <div class="intro-eyebrow">
+                    <span class="eyebrow-line"></span>
+                    <span>MADE WITH LOVE</span>
+                    <span class="eyebrow-line"></span>
                 </div>
+
+                <div class="intro-star">✧</div>
 
                 <h1>
-                    The Little World
-                    <span>Waiting for Rain</span>
+                    A little world<br>
+                    <span>waiting for Rain.</span>
                 </h1>
 
-                <p>
-                    Somewhere between a thousand stars
-                    and a thousand little moments,
-                    there's a world waiting just for you.
+                <p class="intro-description">
+                    Somewhere between a thousand stars<br>
+                    and a little bit of forever.
                 </p>
 
-                <div class="intro-decoration">
-                    <span></span>
-                    <i>✦</i>
-                    <span></span>
-                </div>
-
-                <button id="beginButton" class="begin-button">
-                    <span>Begin your journey</span>
+                <button
+                    class="begin-button"
+                    id="beginButton"
+                    type="button"
+                >
+                    <span>Begin</span>
                     <span class="button-arrow">→</span>
                 </button>
 
-                <div class="intro-footer">
-                    TAKE YOUR TIME. THIS IS YOUR LITTLE UNIVERSE.
+                <p class="intro-footnote">
+                    TAKE YOUR TIME. THIS LITTLE WORLD IS YOURS.
+                </p>
+
+            </div>
+
+            <div class="intro-bottom">
+                <span>FOR RAIN</span>
+                <span>♡</span>
+                <span>FROM KEI</span>
+            </div>
+
+        </section>
+
+        <!-- Ending message -->
+        <section
+            class="final-screen"
+            id="finalScreen"
+            aria-hidden="true"
+        >
+
+            <div class="final-content">
+
+                <div class="final-overline">
+                    <span class="final-line"></span>
+                    <span>A LITTLE SOMETHING FOR YOU</span>
+                    <span class="final-line"></span>
                 </div>
 
-            </div>
-
-            <div class="intro-bottom-stars">✦ · · ✧ · · ✦</div>
-
-        </section>
-
-
-        <!-- =================================
-             SCENE 1: THE QUIET BEGINNING
-             00:00 - 00:25
-        ================================== -->
-
-        <section id="scene1" class="scene universe">
-
-            <div class="universe-nebula nebula-one"></div>
-            <div class="universe-nebula nebula-two"></div>
-
-            <div class="universe-moon">
-                <div class="moon-crater crater-one"></div>
-                <div class="moon-crater crater-two"></div>
-            </div>
-
-            <div class="universe-horizon"></div>
-
-            <div class="universe-caption">
-                <span class="caption-line"></span>
-                SOMEWHERE IN THE UNIVERSE
-                <span class="caption-line"></span>
-            </div>
-
-        </section>
-
-
-        <!-- =================================
-             SCENE 2: A WORLD COMES ALIVE
-             00:25 - 00:55
-        ================================== -->
-
-        <section id="scene2" class="scene islands">
-
-            <div class="island-clouds">
-
-                <div class="cloud cloud-one"></div>
-                <div class="cloud cloud-two"></div>
-                <div class="cloud cloud-three"></div>
-                <div class="cloud cloud-four"></div>
-
-            </div>
-
-            <div class="floating-island island-left">
-
-                <div class="island-land"></div>
-
-                <div class="island-house">
-                    <div class="house-roof"></div>
-                    <div class="house-body">
-                        <div class="house-window"></div>
-                        <div class="house-door"></div>
-                    </div>
-                </div>
-
-                <div class="island-tree tree-left"></div>
-                <div class="island-tree tree-right"></div>
-
-                <div class="island-grass"></div>
-
-            </div>
-
-            <div class="floating-island island-center">
-
-                <div class="island-land"></div>
-
-                <div class="island-house house-large">
-                    <div class="house-roof"></div>
-                    <div class="house-body">
-                        <div class="house-window"></div>
-                        <div class="house-window window-two"></div>
-                        <div class="house-door"></div>
-                    </div>
-                </div>
-
-                <div class="island-tree tree-left"></div>
-                <div class="island-tree tree-right"></div>
-
-            </div>
-
-            <div class="floating-island island-right">
-
-                <div class="island-land"></div>
-
-                <div class="island-tree tree-left"></div>
-                <div class="island-tree tree-right"></div>
-
-                <div class="island-lantern">✦</div>
-
-            </div>
-
-            <div class="island-mist"></div>
-
-            <div class="scene-caption island-caption">
-                <span>AND A LITTLE WORLD BEGAN TO GLOW</span>
-            </div>
-
-        </section>
-
-
-        <!-- =================================
-             SCENE 3: THE FLOWER GARDEN
-             00:55 - 01:25
-        ================================== -->
-
-        <section id="scene3" class="scene garden">
-
-            <div class="garden-sky"></div>
-            <div class="garden-moon"></div>
-
-            <div id="gardenGround" class="garden-ground"></div>
-
-            <div id="flowerField" class="flower-field"></div>
-
-            <div id="fireflyField" class="firefly-field"></div>
-
-            <div class="garden-mist mist-left"></div>
-            <div class="garden-mist mist-right"></div>
-
-            <div class="scene-caption garden-caption">
-                <span>EVEN THE QUIETEST PLACES CAN BLOOM</span>
-            </div>
-
-        </section>
-
-
-        <!-- =================================
-             SCENE 4: SHOOTING STARS
-             01:25 - 01:55
-        ================================== -->
-
-        <section id="scene4" class="scene shooting-stars">
-
-            <div class="galaxy-nebula nebula-purple"></div>
-            <div class="galaxy-nebula nebula-gold"></div>
-
-            <div class="galaxy-horizon"></div>
-
-            <div id="shootingStarField"></div>
-
-            <div class="scene-caption shooting-caption">
-                <span>AND THE SKY FILLED WITH A THOUSAND WISHES</span>
-            </div>
-
-        </section>
-
-
-        <!-- =================================
-             SCENE 5: HEART FORMATION
-             01:55 - 02:30
-        ================================== -->
-
-        <section id="scene5" class="scene heart-scene">
-
-            <div class="heart-nebula"></div>
-
-            <div class="heart-aura"></div>
-
-            <div class="heart-caption">
-                <span>EVERY LITTLE LIGHT FINDS ITS PLACE</span>
-            </div>
-
-            <div class="heart-glow-text">
-                FOR YOU
-            </div>
-
-        </section>
-
-
-        <!-- =================================
-             SCENE 6: FINAL REVEAL
-             02:30 - 03:00
-        ================================== -->
-
-        <section id="scene6" class="scene finale">
-
-            <div class="finale-glow"></div>
-
-            <div class="finale-content">
-
-                <div class="finale-overline">
-                    A THOUSAND STARS COULD NEVER BE ENOUGH
-                </div>
-
-                <div class="finale-heart">♡</div>
+                <div class="final-sparkle">✧</div>
 
                 <h2>
-                    For you,
+                    For you,<br>
                     <span>Rain.</span>
                 </h2>
 
-                <div class="finale-divider"></div>
+                <div class="message-divider">
+                    <span></span>
+                    <span>♡</span>
+                    <span></span>
+                </div>
 
-                <p class="finale-main-message">
-                    If I could give you every star in the sky,
-                    I would.
-                </p>
-
-                <p class="finale-secondary-message">
-                    But even a thousand stars wouldn't be enough
-                    to show you just how much I love you.
+                <p class="final-message">
+                    If I could give you every star in the sky, I would.
+                    <br><br>
+                    But even a thousand stars wouldn't be enough to show you just how much I love you.
                     I hope you never forget how special you are to me.
                 </p>
 
-                <p class="finale-love">
+                <p class="final-love">
                     I love you, Rain.
                 </p>
 
-                <div class="finale-signature">
-                    Always,
-                    <span>Kei ♡</span>
+                <div class="signature">
+                    Always, Kei <span>♡</span>
                 </div>
 
-                <div class="finale-bottom">
-                    IN EVERY UNIVERSE, I'D STILL CHOOSE YOU.
-                </div>
+                <button
+                    class="replay-button"
+                    id="replayButton"
+                    type="button"
+                >
+                    <span>Experience it again</span>
+                    <span>↻</span>
+                </button>
 
             </div>
 
         </section>
 
-    </main>
+        <!-- Optional background music -->
+        <audio id="backgroundMusic" loop preload="none">
+            <source src="background-music.mp3" type="audio/mpeg">
+        </audio>
 
-    <script src="script.js"></script>
+    </main>
 
 </body>
 </html>
